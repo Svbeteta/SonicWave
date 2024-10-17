@@ -1,0 +1,344 @@
+/* --- Estilo General --- */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth; 
+    font-family: 'Raleway', sans-serif;
+    height: 100%;
+}
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* --- Barra de Navegación ---*/
+
+/* Estilos del nav general */
+/* Estilos del nav general */
+nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: #131313;
+    padding: 20px 0;
+    z-index: 1000;
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+nav h2 {
+    font-size: 20px;
+    color: white;
+    font-weight: 300;
+    margin-left: 80px;
+}
+
+/* Estilos de la lista de navegación */
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+nav ul li {
+    position: relative; 
+    margin-left: 20px;
+}
+
+/* Estilos para los enlaces en el nav */
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: 300;
+    position: relative;
+}
+
+/* Efecto hover en los enlaces del nav */
+nav ul li a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+    background: #929087;
+    position: absolute;
+    left: 0;
+    bottom: 0; 
+    transition: width 0.3s ease; 
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+nav ul li a:hover {
+    color: #929087; 
+}
+
+/* Estilos para el botón de inicio de sesión / perfil */
+nav a.login {
+    margin-right: 80px;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: 300;
+    position: relative;
+    border: 2px solid white; 
+    border-radius: 25px; 
+    background-color: transparent; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a.login:hover {
+    background-color: white; 
+    color: #131313; 
+}
+
+#welcome-message {
+    color: #ffffff;
+    font-weight: 300;
+    position: absolute; 
+    right: 200px; 
+    animation: fade-in 1s ease-in-out;
+    text-align: center;
+    white-space: nowrap; 
+}
+
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* --- Estilo General para las Secciones ---*/
+
+section {
+    height: 100vh; 
+    padding: 105px 20px; 
+    text-align: center;
+}
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* --- Sección Inicio ---*/
+
+#home {
+    font-family: 'Raleway', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/ESTUDIO.jpeg') no-repeat center center;
+    background-size: cover; 
+    background-attachment: fixed; 
+    background-position: center; 
+    min-height: 100vh; 
+    overflow: hidden;
+}
+
+
+#home .content {
+    position: relative;
+    color: white;
+    text-align: left;
+    top: 85%;
+    transform: translateY(-50%);
+    padding-left: 80px;
+    width: 100%;
+}
+
+#home h1 {
+    font-size: 4em;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+#home p {
+    font-size: 1.5em;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.view-products-btn {
+    font-family: 'Raleway', sans-serif;
+    text-transform: none;
+    display: inline-block;
+    background-color: transparent;
+    padding: 15px 30px;
+    border: 2px solid #ffffff; 
+    border-radius: 25px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.view-products-btn:hover {
+    background-color: white; 
+    color: #131313; 
+}
+
+/* --- Sección Inicio ---*/
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* --- Sección Sobre Nosotros ---*/
+
+#about {
+    font-family: 'Raleway', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/store.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-position: center; 
+    color: #ffffff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    padding: 20px;
+}
+
+
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-left: 80px; 
+    width: 100%;
+}
+
+.about-text {
+    flex: 1;
+    padding-right: 40px;
+    color: #ffffff;
+}
+
+.about-text h2 {
+    font-size: 4em;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.about-text h3 {
+    font-size: 1.5em;
+    margin-top: 5px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    font-size: 1.2em;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    font-weight: 300;
+    text-align: justify;
+}
+
+.cnt-btn {
+    display: inline-block;
+    background-color: transparent;
+    border: 2px solid #ffffff; 
+    padding: 10px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cnt-btn:hover {
+    background-color: white; 
+    color: #131313; 
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* --- Sección Sobre Nosotros ---*/
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* --- Sección Productos ---*/
+
+
+#products {
+    background-color: #1C1C1C;
+    color: white;
+}
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* --- Sección Contacto ---*/
+
+
+#contact {
+    background-color: #131313;
+    color: #333;
+}
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* --- Pie de Página ---*/
+
+
+footer {
+    background-color:#131313;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+form input, form textarea {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    max-width: 500px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
