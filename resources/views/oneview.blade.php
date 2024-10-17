@@ -75,8 +75,39 @@
 
 
     <section id="products">
-        <h2>Nuestros Productos</h2>
-        <p>We offer various web development services using modern technologies.</p>
+        <div class="products-container">
+            <!-- Primera sección -->
+            <div class="product-item" style="background-image: url('/images/categorias/guitarras/main.jpg');">
+                <a href="#guitars">
+                    <div class="overlay"></div>
+                    <h3>Guitarras</h3>
+                </a>
+            </div>
+
+            <!-- Segunda sección -->
+            <div class="product-item" style="background-image: url('/images/drums.jpg');">
+                <a href="#drums">
+                    <div class="overlay"></div>
+                    <h3>Baterías</h3>
+                </a>
+            </div>
+
+            <!-- Tercera sección -->
+            <div class="product-item" style="background-image: url('/images/keys.jpg');">
+                <a href="#keyboards">
+                    <div class="overlay"></div>
+                    <h3>Teclados</h3>
+                </a>
+            </div>
+
+            <!-- Cuarta sección -->
+            <div class="product-item" style="background-image: url('/images/studio.jpg');">
+                <a href="#studio">
+                    <div class="overlay"></div>
+                    <h3>Estudio</h3>
+                </a>
+            </div>
+        </div>
     </section>
 
     <section id="contact">
