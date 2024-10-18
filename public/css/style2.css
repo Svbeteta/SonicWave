@@ -6,6 +6,8 @@ body, html {
     scroll-behavior: smooth; 
     font-family: 'Raleway', sans-serif;
     height: 100%;
+    overflow-x: hidden; 
+    width: 100vw; 
 }
 
 /* -----------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -338,12 +340,13 @@ section {
 .product-item h3 {
     position: absolute;
     bottom: 20px;
-    left: 20px;
-    color: white;
-    font-size: 2em;
+    color: rgb(224, 224, 224);
+    font-size: 2em; 
+    padding-left: 80px;
     font-family: 'Raleway', sans-serif;
     z-index: 2;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: transform 0.3s ease, font-size 0.3s ease;
+    transform-origin: left bottom;
 }
 
 /* Enlace a la sección */
@@ -361,10 +364,11 @@ section {
 }
 
 .product-item:hover h3 {
-    transform: translateX(10px); /* Mueve ligeramente el texto a la derecha */
-    color: #ffcc00; /* Cambia el color del texto */
+    transform: scale(1.2); /* Moves the text and scales it up by 1.2 */
+    /* Optionally adjust the font-size */
+    font-size: 2.4em; /* Increases the font size on hover */
+    color: #ffffff;
 }
-
 
 
 /* -----------------------------------------------------------------------------------------------------------------------------------------------*/
