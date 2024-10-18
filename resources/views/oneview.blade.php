@@ -23,33 +23,17 @@
 
     <div class="profile-section">
         @if (Auth::check())
-            @if (session('show_welcome_message'))
-                <p id="welcome-message">¡Bienvenido, {{ Auth::user()->name }}!</p>
-
-                {{ session()->forget('show_welcome_message') }}
-            @endif
-            <a href="{{ route('dashboard') }}" class="login">Mi Perfil</a>
+            <a href="{{ route('dashboard') }}" class="login">{{ Auth::user()->name }}</a>
         @else
             <a href="/login" class="login">Iniciar Sesión</a>
         @endif
+        <a href="/carrito" class="cart-link">
+            <img src="/images/grocery-store.png" alt="Carrito" class="cart-icon">
+            <span class="cart-count">0</span> 
+        </a>
     </div>
+
 </nav>
-
-
-<script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        const welcomeMessage = document.getElementById('welcome-message');
-        if (welcomeMessage) {
-            setTimeout(() => {
-                welcomeMessage.style.opacity = '0';
-                welcomeMessage.style.transition = 'opacity 1s ease';
-            }, 5000);
-            setTimeout(() => {
-                welcomeMessage.style.display = 'none';
-            }, 6000); 
-        }
-    });
-</script>
 
 
     <section id="home">
@@ -78,7 +62,7 @@
     <div class="products-container">
         @foreach ($categorias as $categoria)
             <div class="product-item" style="background-image: url('{{ asset($categoria->imagen) }}');">
-                <a href="#{{ Str::slug($categoria->nombre) }}">
+                <a href="/shop">
                     <div class="overlay"></div>
                     <h3>{{ $categoria->nombre }}</h3>
                 </a>

@@ -8,6 +8,10 @@ Route::get('/', function () {
     return view('oneview');
 });
 
+Route::get('/shop', function () {
+    return view('products');
+});
+
 Route::get('/', [CategoriaController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
