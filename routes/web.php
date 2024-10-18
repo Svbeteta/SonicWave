@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriaController;
 
 Route::get('/', function () {
     return view('oneview');
 });
+
+Route::get('/', [CategoriaController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

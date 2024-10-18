@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categorías', function (Blueprint $table) {
-            $table->integer('id_categoria', true);
-            $table->string('nombre', 45);
+        Schema::create('geolocalizacion', function (Blueprint $table) {
+            $table->integer('id_geolocalizacion', true);
+            $table->decimal('latitud', 9, 6);
+            $table->decimal('longitud', 9, 6);
+            $table->string('direccion');
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categorías');
+        Schema::dropIfExists('geolocalizacion');
     }
 };

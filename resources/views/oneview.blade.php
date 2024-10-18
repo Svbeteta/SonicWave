@@ -74,41 +74,19 @@
 </section>
 
 
-    <section id="products">
-        <div class="products-container">
-            <!-- Primera sección -->
-            <div class="product-item" style="background-image: url('/images/categorias/guitarras/main.jpg');">
-                <a href="#guitars">
+<section id="products">
+    <div class="products-container">
+        @foreach ($categorias as $categoria)
+            <div class="product-item" style="background-image: url('{{ asset($categoria->imagen) }}');">
+                <a href="#{{ Str::slug($categoria->nombre) }}">
                     <div class="overlay"></div>
-                    <h3>Guitarras</h3>
+                    <h3>{{ $categoria->nombre }}</h3>
                 </a>
             </div>
+        @endforeach
+    </div>
+</section>
 
-            <!-- Segunda sección -->
-            <div class="product-item" style="background-image: url('/images/drums.jpg');">
-                <a href="#drums">
-                    <div class="overlay"></div>
-                    <h3>Baterías</h3>
-                </a>
-            </div>
-
-            <!-- Tercera sección -->
-            <div class="product-item" style="background-image: url('/images/keys.jpg');">
-                <a href="#keyboards">
-                    <div class="overlay"></div>
-                    <h3>Teclados</h3>
-                </a>
-            </div>
-
-            <!-- Cuarta sección -->
-            <div class="product-item" style="background-image: url('/images/studio.jpg');">
-                <a href="#studio">
-                    <div class="overlay"></div>
-                    <h3>Estudio</h3>
-                </a>
-            </div>
-        </div>
-    </section>
 
     <section id="contact">
         <h2>Contact Us</h2>

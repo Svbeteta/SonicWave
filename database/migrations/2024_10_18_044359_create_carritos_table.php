@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('geolocalizacion', function (Blueprint $table) {
-            $table->integer('id_geolocalizacion', true);
-            $table->decimal('latitud', 9, 6);
-            $table->decimal('longitud', 9, 6);
-            $table->string('direccion', 45);
+        Schema::create('carritos', function (Blueprint $table) {
+            $table->integer('id_carrito', true);
+            $table->unsignedBigInteger('id_usuario')->nullable()->index('id_usuario');
+            $table->string('estado', 45);
+            $table->decimal('total', 10);
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('geolocalizacion');
+        Schema::dropIfExists('carritos');
     }
 };

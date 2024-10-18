@@ -360,7 +360,7 @@ section {
 
 /* Efecto hover (al pasar el ratón) */
 .product-item:hover .overlay {
-    background-color: rgba(0, 0, 0, 0.7); /* Oscurecer aún más */
+    background-color: rgba(0, 0, 0, 0.75); /* Oscurecer aún más */
 }
 
 .product-item:hover h3 {
