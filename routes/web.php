@@ -8,11 +8,11 @@ Route::get('/', function () {
     return view('oneview');
 });
 
-Route::get('/shop', function () {
-    return view('products');
-});
-
 Route::get('/', [CategoriaController::class, 'index'])->name('home');
+
+Route::get('/categoria/{categoriaId}', [CategoriaController::class, 'productosPorCategoria'])->name('categoria.productos');
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -62,7 +62,7 @@
     <div class="products-container">
         @foreach ($categorias as $categoria)
             <div class="product-item" style="background-image: url('{{ asset($categoria->imagen) }}');">
-                <a href="/shop">
+                <a href="{{ route('categoria.productos', ['categoriaId' => $categoria->id_categoria]) }}">
                     <div class="overlay"></div>
                     <h3>{{ $categoria->nombre }}</h3>
                 </a>
