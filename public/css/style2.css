@@ -413,3 +413,143 @@ button:hover {
     background-color: #45a049;
 }
 
+
+
+
+
+
+
+
+
+
+
+/* Aplicar glassmorphism solo a la vista de Spotify */
+.spotify-view {
+    background-image: url("/images/glass.jpeg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Tarjeta con efecto glassmorphism */
+.spotify-view .container {
+    backdrop-filter: blur(25px) saturate(181%);
+    background-color: rgba(255, 255, 255, 0.55);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Mantener el resto del CSS original sin modificar */
+.spotify-title {
+    margin-top: 2px;
+    margin-bottom: 20px; 
+    font-size: 2em;      
+    color: rgb(0, 0, 0);      
+    text-align: center;  
+    font-weight: bold;   
+}
+
+.container {
+    max-width: 600px;
+    margin: 130px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #000000;
+    color: white;
+    border: white;
+    border-radius: 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #161616;
+}
+
+.artist-info {
+    margin-top: 20px;
+}
+
+.artist-info h2 {
+    color: #000000;
+}
+
+.artist-image {
+    max-width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.top-tracks {
+    margin-top: 20px;
+}
+
+.top-tracks h2 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.top-tracks ol {
+    list-style-type: decimal;
+    padding-left: 20px;
+}
+
+.top-tracks li {
+    margin-bottom: 20px;
+}
+
+.top-tracks li p {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+}
+
+audio {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.vista-previa-no-disponible {
+    font-size: 0.9em;
+    color: #9e9d9d;
+    font-style: italic;
+}
+
+
+
+

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
@@ -20,14 +21,18 @@ class CategoriaController extends Controller
         return view('products', compact('categorias'));
     }
 
-    public function productosPorCategoria($categoriaId)
-    {
-        // Asegurarse de que busca por 'id_categoria' en lugar de 'id'
-        $categoria = Categoria::where('id_categoria', $categoriaId)->firstOrFail();
+    public function productosPorCategoria($slug)
+{
+    // Obtener la categoría según el slug de la URL
+    $categoria = Categoria::where('slug', $slug)->firstOrFail();
 
-        // Pasar la categoría seleccionada a la vista
-        return view('products', [
-            'categoria' => $categoria
-        ]);
-    }
+    // Obtener los productos de esa categoría
+    $productos = Producto::where('id_categoria', $categoria->id_categoria)->get();
+
+    // Pasar los productos y la categoría a la vista
+    return view('products', [
+        'categoria' => $categoria,
+        'productos' => $productos
+    ]);
+}
 }
