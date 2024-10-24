@@ -1,12 +1,12 @@
 @extends('layouts.shop')
 
 @section('content')
-<body class="spotify-view"> <!-- Añadir la clase spotify-view aquí -->
+<body class="spotify-view">
     <div class="container">
         <div class="row">
             <!-- Columna izquierda: Información del artista -->
             <div class="col-md-6">
-                <h1 class="spotify-title">Búsqueda de Artista en Spotify</h1>
+                <h1 class="spotify-title">Buscar Artista</h1>
 
                 <form method="POST" action="{{ route('buscar.artista') }}">
                     @csrf
@@ -28,30 +28,37 @@
                 @endif
             </div>
 
-            <!-- Columna derecha: Top 5 Canciones -->
+            <!-- Columna derecha: Información de la canción -->
             <div class="col-md-6">
-                @if (isset($top_tracks) && count($top_tracks) > 0)
-                    <div class="top-tracks">
-                        <h2>Top 5 Canciones</h2>
-                        <ol>
-                            @foreach ($top_tracks as $track)
-                                <li>
-                                    <p><strong>{{ $track['name'] }}</strong></p>
-                                    @if(isset($track['preview_url']) && $track['preview_url'])
-                                        <audio controls>
-                                            <source src="{{ $track['preview_url'] }}" type="audio/mpeg">
-                                            Tu navegador no soporta la reproducción de audio.
-                                        </audio>
-                                    @else
-                                        <p class="vista-previa-no-disponible"><br>Vista previa no disponible</p>
-                                    @endif
-                                </li>
-                            @endforeach
-                        </ol>
+                <h1 class="spotify-title">Buscar Canción</h1>
+
+                <form method="POST" action="{{ route('buscar.cancion') }}">
+                    @csrf
+                    <label for="song_name">Nombre de la Canción:</label>
+                    <input type="text" id="song_name" name="song_name" placeholder="Ingrese el nombre de la canción" required>
+                    <button type="submit">Buscar</button>
+                </form>
+
+                @if (isset($track_data))
+                    <div class="track-info">
+                        <h2>Información de la Canción</h2>
+                        <p><strong>Nombre:</strong> {{ $track_data['name'] }}</p>
+                        <p><strong>Artista(s):</strong> {{ $track_data['artists'] }}</p>
+                        <p><strong>Álbum:</strong> {{ $track_data['album'] }}</p>
+                        <p><strong>Fecha de Lanzamiento:</strong> {{ $track_data['release_date'] }}</p>
+                        @if ($track_data['image'])
+                            <img src="{{ $track_data['image'] }}" alt="Imagen del álbum" class="artist-image">
+                        @endif
+                        @if ($track_data['preview_url'])
+                            <audio controls>
+                                <source src="{{ $track_data['preview_url'] }}" type="audio/mpeg">
+                                Tu navegador no soporta la reproducción de audio.
+                            </audio>
+                        @else
+                            <p class="vista-previa-no-disponible"><br>Vista previa no disponible</p>
+                        @endif
                     </div>
                 @endif
             </div>
         </div>
     </div>
-</body>
-@endsection

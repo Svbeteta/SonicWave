@@ -16,6 +16,7 @@ Route::get('/categorias/{slug}', [CategoriaController::class, 'productosPorCateg
 //
 
 Route::post('/buscar-artista', [SpotifyController::class, 'buscarArtista'])->name('buscar.artista');
+Route::post('/buscar-cancion', [SpotifyController::class, 'buscarCancion'])->name('buscar.cancion');
 
 Route::get('/buscar-artista', function () {
     return view('spotify');

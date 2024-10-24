@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class SpotifyController extends Controller
 {
+    // Función para obtener el token de autenticación
     public function getToken() {
         $client_id = "1e61f89944a048cdbf8f01bc9e8c620e";
         $client_secret = "60f1b57d9c74438b89d4798372951899";
@@ -31,6 +32,7 @@ class SpotifyController extends Controller
         return $json_result['access_token'];
     }
 
+    // Función para buscar artistas
     public function buscarArtista(Request $request) {
         $token = $this->getToken();
         $artist_name = $request->input('artist_name');
@@ -85,5 +87,44 @@ class SpotifyController extends Controller
 
         // Devolver los datos del artista y las canciones a la vista
         return view('spotify', compact('artist_data', 'top_tracks'));
+    }
+
+    // Nueva función para buscar canciones
+    public function buscarCancion(Request $request) {
+        $token = $this->getToken();
+        $song_name = $request->input('song_name');
+
+        // Buscar la canción
+        $url = "https://api.spotify.com/v1/search?q=" . urlencode($song_name) . "&type=track&limit=1";
+        $headers = [
+            "Authorization: Bearer " . $token
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        $json_result = json_decode($result, true);
+
+        // Extraer los datos de la canción
+        if (!empty($json_result['tracks']['items'])) {
+            $track = $json_result['tracks']['items'][0];
+            $track_data = [
+                'name' => $track['name'],
+                'album' => $track['album']['name'],
+                'artists' => implode(', ', array_column($track['artists'], 'name')),
+                'release_date' => $track['album']['release_date'],
+                'preview_url' => $track['preview_url'] ?? null,
+                'image' => $track['album']['images'][0]['url'] ?? ''
+            ];
+        } else {
+            $track_data = null;
+        }
+
+        // Devolver los datos de la canción a la vista
+        return view('spotify', compact('track_data'));
     }
 }
