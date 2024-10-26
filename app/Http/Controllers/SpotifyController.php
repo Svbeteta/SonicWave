@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class SpotifyController extends Controller
 {
-    // Función para obtener el token de autenticación
     public function getToken() {
         $client_id = "1e61f89944a048cdbf8f01bc9e8c620e";
         $client_secret = "60f1b57d9c74438b89d4798372951899";
@@ -64,7 +63,6 @@ class SpotifyController extends Controller
                 'image' => $artist['images'][0]['url'] ?? ''
             ];
 
-            // Obtener el top 5 de canciones
             $top_tracks_url = "https://api.spotify.com/v1/artists/" . $artist_data['id'] . "/top-tracks?market=US";
             $ch = curl_init($top_tracks_url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
