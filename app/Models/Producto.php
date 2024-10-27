@@ -9,9 +9,13 @@ class Producto extends Model
 {
     use HasFactory;
 
-    protected $table = 'productos'; // Nombre de la tabla
+    protected $primaryKey = 'id_producto';
 
-    protected $fillable = ['nombre', 'descripcion', 'precio', 'id_categoria', 'imagen'];
+    protected $table = 'productos';
+
+    protected $fillable = ['nombre', 'descripcion', 'precio', 'id_categoria', 'imagen', 'slug'];
+
+    public $timestamps = false; // Disable timestamps to avoid 'updated_at' issues
 
     public function categoria()
     {

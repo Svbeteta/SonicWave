@@ -3,7 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\SpotifyController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CarritoController;
 
 Route::get('/', function () {
     return view('oneview');
@@ -12,18 +13,16 @@ Route::get('/', function () {
 Route::get('/', [CategoriaController::class, 'index'])->name('home');
 
 Route::get('/categorias/{slug}', [CategoriaController::class, 'productosPorCategoria'])->name('categoria.productos');
+Route::get('/productos/{slug}', [ProductoController::class, 'show'])->name('productos.show');
 
-//
+Route::middleware('auth')->group(function () {
+    Route::get('/carrito', [CarritoController::class, 'show'])->name('carrito'); 
+    Route::post('/carrito/add/{producto}', [CarritoController::class, 'add'])->name('carrito.add');
+    Route::post('/carrito/update/{producto}', [CarritoController::class, 'update'])->name('carrito.update');
+    Route::delete('/carrito/remove/{producto}', [CarritoController::class, 'remove'])->name('carrito.remove');
+    Route::post('/carrito/checkout', [CarritoController::class, 'checkout'])->name('carrito.checkout');
+});
 
-Route::post('/buscar-artista', [SpotifyController::class, 'buscarArtista'])->name('buscar.artista');
-Route::post('/buscar-cancion', [SpotifyController::class, 'buscarCancion'])->name('buscar.cancion');
-
-Route::get('/buscar-artista', function () {
-    return view('spotify');
-})->name('form.artista');
-
-
-//
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -28,9 +28,10 @@
             <a href="/login" class="login">Iniciar Sesión</a>
         @endif
         <a href="/carrito" class="cart-link">
-            <img src="/images/grocery-store.png" alt="Carrito" class="cart-icon">
-            <span class="cart-count">0</span> 
+            <img src="{{ asset('images/grocery-store.png') }}" alt="Carrito" class="cart-icon">
+            <span class="cart-count">{{ $cartCount ?? 0 }}</span> 
         </a>
+
     </div>
 
 </nav>

@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carrito extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = ['id_usuario', 'estado', 'total'];
 
-    public function detallesCarrito()
+    public function detalles()
     {
-        return $this->hasMany(DetalleCarrito::class, 'id_carrito');
+        return $this->hasMany(DetalleCarrito::class, 'id_carrito', 'id_carrito');
     }
 
     public function usuario()
