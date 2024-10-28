@@ -8,6 +8,8 @@ class Carrito extends Model
 {
     public $timestamps = false;
 
+    protected $primaryKey = 'id_carrito';
+    
     protected $fillable = ['id_usuario', 'estado', 'total'];
 
     public function detalles()

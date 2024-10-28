@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Models\Carrito;
+use App\Models\DireccionUsuario;
 use App\Models\DetallesCarrito;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +25,6 @@ class CarritoController extends Controller
     }
 
 
-
-    // Add a product to the carrito
     public function add(Request $request, Producto $producto)
     {   
         $carrito = Carrito::firstOrCreate(
@@ -47,7 +46,6 @@ class CarritoController extends Controller
         return redirect()->route('carrito')->with('success', 'Producto añadido al carrito.');
     }
 
-    // Update product quantity in the carrito
     public function update(Request $request, Producto $producto)
     {
         $carrito = Carrito::where('id_usuario', Auth::id())->where('estado', 'open')->first();
@@ -62,7 +60,6 @@ class CarritoController extends Controller
         return redirect()->route('carrito')->with('success', 'Carrito actualizado.');
     }
 
-    // Remove a product from the carrito
     public function remove(Producto $producto)
     {
         $carrito = Carrito::where('id_usuario', Auth::id())->where('estado', 'open')->first();
@@ -77,25 +74,46 @@ class CarritoController extends Controller
         return redirect()->route('carrito')->with('success', 'Producto eliminado del carrito.');
     }
 
-    // Checkout: finalize the carrito
-    public function checkout()
+    public function pago()
+{
+    $carrito = Carrito::where('id_usuario', Auth::id())
+                      ->where('estado', 'open')
+                      ->with('detalles.producto')
+                      ->first();
+
+    if (!$carrito) {
+        return redirect()->route('home')->with('error', 'No tienes un carrito activo.');
+    }
+
+    // Calcular el total de la compra
+    $total = $carrito->detalles->sum(fn($item) => $item->producto->precio * $item->cantidad);
+
+    // Obtener la dirección del usuario actual
+    $direccion = DireccionUsuario::where('id_usuario', Auth::id())
+                                 ->with('geolocalizacion')
+                                 ->first();
+
+    return view('pago', compact('carrito', 'total', 'direccion'));
+}
+
+
+    public function checkout(Request $request)
     {
         $carrito = Carrito::where('id_usuario', Auth::id())->where('estado', 'open')->first();
 
         if (!$carrito || $carrito->detalles->isEmpty()) {
-            return redirect()->route('carrito')->with('error', 'Tu carrito está vacío.');
+            return redirect()->route('pago')->with('error', 'Tu carrito está vacío.');
         }
 
-        // Finalize the carrito and update the total
+        // Calcular el total de la compra
         $total = $carrito->detalles->sum(fn($item) => $item->producto->precio * $item->cantidad);
+
+        // Marcar el carrito como cerrado y actualizar el total
         $carrito->update(['estado' => 'closed', 'total' => $total]);
 
-        // Optionally, create a new `Pedido` record here
-
-        return redirect()->route('carrito')->with('success', '¡Compra completada!');
+        return redirect()->route('home')->with('success', '¡Compra completada!');
     }
 
-    // Helper function to get cart count
     public function getCartCount()
     {
         $carrito = Carrito::where('id_usuario', Auth::id())->where('estado', 'open')->first();

@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Geolocalizacion extends Model
 {
+    protected $table = 'geolocalizacion';
+    protected $primaryKey = 'id_geolocalizacion';
     protected $fillable = ['latitud', 'longitud', 'direccion'];
+    public $timestamps = false;
 
     public function direccionesUsuario()
     {

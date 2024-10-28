@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use App\Models\Sucursal;
 
 class CategoriaController extends Controller
 {
     public function index()
     {
         $categorias = Categoria::all();
-        return view('oneview', compact('categorias'));
+        $sucursales = Sucursal::with('geolocalizacion')->get();
+        return view('oneview', compact('categorias', 'sucursales'));
     }
 
     public function index2()

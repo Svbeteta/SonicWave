@@ -74,16 +74,80 @@
 
 
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form action="/contact" method="POST">
-            @csrf
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
+<section id="contact">
+    <div class="contact-container">
+            <div class="contact-form">
+            <h2>¡Queremos Escucharte!</h2>
+            <form action="{{ route('contact.send') }}" method="POST">
+                @csrf
+                <label for="name">Nombre:</label>
+                <input type="text" name="name" id="name" placeholder="Tu Nombre" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" placeholder="Tu Correo" required>
+                
+                <label for="message">Mensaje:</label>
+                <textarea name="message" id="message" placeholder="Escribe tu mensaje aquí" required></textarea>
+                
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <h3>Ubicación de Nuestras Sucursales</h3>
+            
+            <div id="map" style="height: 400px; border-radius: 8px;">
+            </div>
+            
+            <div class="office-info">
+    @foreach ($sucursales as $sucursal)
+        <h4>{{ $sucursal->nombre }}</h4>
+        <p>{{ $sucursal->geolocalizacion->direccion }}</p>
+    @endforeach
+</div>
+
+
+    </div>
+</section>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMznw6Z7nd2ODWJv8WnYuE_MiAujSmLUc&callback=initMap" async defer></script>
+<script>
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 14.5943, lng: -90.5178},
+            zoom: 13
+        });
+
+        fetch('/api/sucursales')
+            .then(response => response.json())
+            .then(data => {
+                console.log("Datos de sucursales recibidos:", data);
+                
+                data.forEach(function(sucursal) {
+                    if (sucursal.geolocalizacion) {
+                        const lat = parseFloat(sucursal.geolocalizacion.latitud);
+                        const lng = parseFloat(sucursal.geolocalizacion.longitud);
+
+                        var marker = new google.maps.Marker({
+                            position: { lat: lat, lng: lng },
+                            map: map,
+                            title: sucursal.nombre,
+                        });
+
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: `<h4>${sucursal.nombre}</h4><p>${sucursal.geolocalizacion.direccion}</p>`,
+                        });
+
+                        marker.addListener("click", function() {
+                            infoWindow.open(map, marker);
+                        });
+                    }
+                });
+            })
+            .catch(error => console.error('Error cargando sucursales:', error));
+    }
+</script>
+
 
     <footer style="text-align: center;">
     <p>&copy; 2024 - SonicWave || Crafted with 💻 and ☕ by Samuel Beteta</p>

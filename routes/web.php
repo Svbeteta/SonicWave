@@ -5,15 +5,34 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SucursalController;
+use App\Http\Controllers\DireccionUsuarioController;
+
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 Route::get('/', function () {
     return view('oneview');
 });
 
+Route::get('/pago', [DireccionUsuarioController::class, 'mostrarDireccion'])->name('pago');
+
+Route::get('/pago', [CarritoController::class, 'pago'])->name('pago');
+
+Route::post('/pago', [CarritoController::class, 'checkout'])->name('pago.confirmar');
+
+Route::post('/guardar-direccion', [DireccionUsuarioController::class, 'guardarDireccion'])->name('direccion.guardar');
+
+Route::get('/sucursales', [SucursalController::class, 'showSucursales']);
+
 Route::get('/', [CategoriaController::class, 'index'])->name('home');
 
 Route::get('/categorias/{slug}', [CategoriaController::class, 'productosPorCategoria'])->name('categoria.productos');
 Route::get('/productos/{slug}', [ProductoController::class, 'show'])->name('productos.show');
+
+Route::post('/contact', [ContactController::class, 'send'])
+    ->middleware('auth') 
+    ->name('contact.send');
 
 Route::middleware('auth')->group(function () {
     Route::get('/carrito', [CarritoController::class, 'show'])->name('carrito'); 

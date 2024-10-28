@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class DireccionUsuario extends Model
 {
+    protected $table = 'direccionesusuario';
     protected $fillable = ['id_usuario', 'id_geolocalizacion'];
+    public $timestamps = false;
 
     public function usuario()
     {

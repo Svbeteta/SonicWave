@@ -54,7 +54,7 @@
 
         <div class="cart-summary-box">
             <p><strong>Total:</strong> Q {{ number_format($total, 2) }}</p>
-            <form action="{{ route('carrito.checkout') }}" method="POST">
+            <form action="{{ route('pago') }}" method="GET">
                 @csrf
                 <button type="submit" class="checkout-btn">Iniciar compra</button>
             </form>
