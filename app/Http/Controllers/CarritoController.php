@@ -75,26 +75,26 @@ class CarritoController extends Controller
     }
 
     public function pago()
-{
-    $carrito = Carrito::where('id_usuario', Auth::id())
-                      ->where('estado', 'open')
-                      ->with('detalles.producto')
-                      ->first();
+    {
+        $carrito = Carrito::where('id_usuario', Auth::id())
+                        ->where('estado', 'open')
+                        ->with('detalles.producto')
+                        ->first();
 
-    if (!$carrito) {
-        return redirect()->route('home')->with('error', 'No tienes un carrito activo.');
+        if (!$carrito) {
+            return redirect()->route('home')->with('error', 'No tienes un carrito activo.');
+        }
+
+        $total = $carrito->detalles->sum(fn($item) => $item->producto->precio * $item->cantidad);
+
+        $direcciones = DireccionUsuario::where('id_usuario', Auth::id())
+                                    ->with('geolocalizacion')
+                                    ->get();
+
+        $direccion = $direcciones->first(); 
+
+        return view('pago', compact('carrito', 'total', 'direccion', 'direcciones'));
     }
-
-    // Calcular el total de la compra
-    $total = $carrito->detalles->sum(fn($item) => $item->producto->precio * $item->cantidad);
-
-    // Obtener la dirección del usuario actual
-    $direccion = DireccionUsuario::where('id_usuario', Auth::id())
-                                 ->with('geolocalizacion')
-                                 ->first();
-
-    return view('pago', compact('carrito', 'total', 'direccion'));
-}
 
 
     public function checkout(Request $request)

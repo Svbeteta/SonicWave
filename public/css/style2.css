@@ -846,6 +846,7 @@ hr {
 }
 
 .continue-shopping-btn {
+    font-family: 'Raleway', sans-serif;
     display: inline-block;
     margin-top: 10px;
     padding: 10px 20px;
@@ -860,12 +861,18 @@ hr {
 }
 
 .continue-shopping-btn:hover {
-    background-color: #ffefe0;
+    background-color: #f0f0f0;
 }
 
 .button-container {
     text-align: center; 
 }
+
+
+
+
+
+
 
 .checkout-container {
     display: flex;
@@ -960,7 +967,7 @@ hr {
 }
 
 .checkout-button:hover {
-    background-color: #d35400;
+    background-color: #b4b4b4;
 }
 
 .checkout-product-image-container {
@@ -988,3 +995,5 @@ hr {
     font-weight: bold;
     text-align: center;
 }
+
+

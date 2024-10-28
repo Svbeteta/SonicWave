@@ -15,13 +15,14 @@ Route::get('/', function () {
     return view('oneview');
 });
 
+Route::delete('/direccion/eliminar', [DireccionUsuarioController::class, 'eliminarDireccion'])->name('direccion.eliminar');
+
 Route::get('/pago', [DireccionUsuarioController::class, 'mostrarDireccion'])->name('pago');
 
 Route::get('/pago', [CarritoController::class, 'pago'])->name('pago');
-
 Route::post('/pago', [CarritoController::class, 'checkout'])->name('pago.confirmar');
 
-Route::post('/guardar-direccion', [DireccionUsuarioController::class, 'guardarDireccion'])->name('direccion.guardar');
+Route::post('/guardar-direccion', [DireccionUsuarioController::class, 'guardarDireccion'])->name('guardarDireccion');
 
 Route::get('/sucursales', [SucursalController::class, 'showSucursales']);
 
