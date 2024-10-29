@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use App\Models\Carrito;
 use App\Models\DireccionUsuario;
-use App\Models\DetallesCarrito;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -105,13 +105,17 @@ class CarritoController extends Controller
             return redirect()->route('pago')->with('error', 'Tu carrito está vacío.');
         }
 
-        // Calcular el total de la compra
         $total = $carrito->detalles->sum(fn($item) => $item->producto->precio * $item->cantidad);
 
-        // Marcar el carrito como cerrado y actualizar el total
         $carrito->update(['estado' => 'closed', 'total' => $total]);
 
-        return redirect()->route('home')->with('success', '¡Compra completada!');
+        $pedido = Pedido::create([
+            'id_carrito' => $carrito->id_carrito,
+            'id_direccion_usuario' => $request->input('id_direccion_usuario'), 
+            'total' => $total,
+        ]);
+
+        return redirect()->route('pedidos')->with('success', '¡Compra completada!');
     }
 
     public function getCartCount()

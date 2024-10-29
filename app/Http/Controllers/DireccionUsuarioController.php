@@ -14,16 +14,15 @@ class DireccionUsuarioController extends Controller
         $data = $request->validate([
             'latitud' => 'required|numeric',
             'longitud' => 'required|numeric',
+            'direccion' => 'required|string|max:255',
         ]);
 
-        // Crear o actualizar geolocalización
         $geolocalizacion = Geolocalizacion::create([
             'latitud' => $data['latitud'],
             'longitud' => $data['longitud'],
-            'direccion' => "Dirección generada automáticamente",
+            'direccion' => $data['direccion']
         ]);
 
-        // Crear la relación de dirección para el usuario
         DireccionUsuario::create([
             'id_usuario' => Auth::id(),
             'id_geolocalizacion' => $geolocalizacion->id_geolocalizacion,

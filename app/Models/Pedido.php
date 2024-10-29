@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
+    protected $table = 'pedidos';
+    public $timestamps = false;
     protected $fillable = ['id_carrito', 'id_direccion_usuario', 'id_sucursal', 'total'];
+    protected $casts = [
+        'fecha_transaccion' => 'datetime',
+    ];
 
     public function carrito()
     {
