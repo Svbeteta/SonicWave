@@ -1,0 +1,8 @@
+.env
+.env.*
+.git
+.php.ini
+node_modules
+vendor
+tests
+database/database.sqlite
